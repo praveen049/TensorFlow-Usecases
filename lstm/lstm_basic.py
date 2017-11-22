@@ -24,7 +24,11 @@ def load_data():
         # Lets convert this into int as faster processing
         cpu = cpu.astype(int, copy=False)
         X, y = generate_cpu_data(cpu, TIMESTEPS, seperate=False)
-
+    elif FLAGS.source == 'sin':
+        data = np.arange(-100,100,.05)
+        data = np.sin(data)
+        print (data.shape)
+        X, y = generate_cpu_data(data, TIMESTEPS)
     else:
         return None
     
@@ -110,7 +114,7 @@ sess.run(inita)
 
 batch_size = 100
 no_of_batches = int(len(train_input)/batch_size)
-epoch = 100
+epoch = 10
 test_size = 100
 for i in range(epoch):
     for start, end in zip(range(0, len(train_input), batch_size), range(batch_size, len(train_input)+1, batch_size)):
