@@ -113,7 +113,7 @@ def prepare_dfs (sample_test):
     y = sample_test['GIC']
     from sklearn import preprocessing
     le = preprocessing.LabelEncoder()
-    y = le.fit_transform(y)
+    y = le.fit_transform(
 
     # Split the entire data set into train set and testing set. 
     X_train, X_test, y_train, y_test = train_test_split(X, y)
@@ -125,29 +125,6 @@ def prepare_dfs (sample_test):
 def main(unused_argv):
     global n_words
 
-    #dbpedia = tf.contrib.learn.datasets.load_dataset('dbpedia')
-    # Read all the rows and then sample so that we can get a radmon order
-    '''
-    x_tr = pd.read_csv('./dbpedia_data/dbpedia_csv/train.csv', header=None, names=['label','title', 'content'])
-    x_te = pd.read_csv('./dbpedia_data/dbpedia_csv/test.csv', header=None, names=['label','title','content'])
-    x_tr = x_tr.sample(frac=0.002, replace=True)
-    x_te = x_te.sample(frac=0.002, replace=True)
-    x_train = x_tr['content']
-    y_train = x_tr['label']
-    x_test = x_te['content']
-    y_test = x_te['label']
-    print (x_train.shape)
-    '''
-    '''
-    dbpedia = tf.contrib.learn.datasets.load_dataset(
-        'dbpedia')
-    x_train = pd.DataFrame(dbpedia.train.data)[1]
-    y_train = pd.Series(dbpedia.train.target)
-    
-    x_test = pd.DataFrame(dbpedia.test.data)[1]
-    y_test = pd.Series(dbpedia.test.target)
-    print (type(x_train))
-    '''
     sample_test = load_file(FLAGS.path, FLAGS.rows)
 
     x_train, x_test, y_train, y_test = prepare_dfs(sample_test)
